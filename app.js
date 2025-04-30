@@ -34,8 +34,8 @@ app.use(express.json());
 // Routes
 app.use("/api/robot", robotRoutes);
  
-//app.get("/protected", (req, res) => {
-  app.get((req, res) => {
+app.get("/protected", (req, res) => {
+  
   const user = req.auth.user;
   res.json({ message: `Welcome ${user}, you are authorized.` });
 });
