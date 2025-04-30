@@ -8,7 +8,7 @@ const app = express();
 // CORS
 app.use(
   cors({
-    origin: "https://robot-web-gui-git-master-aly-awnys-projects.vercel.app",
+    origin: "https://robot-front.vercel.app",
     credentials: true,
   })
 );
