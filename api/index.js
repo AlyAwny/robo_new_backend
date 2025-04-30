@@ -1,3 +1,2 @@
-const server = require("../server");
- 
-module.exports = server;
+const handler = require("../server");
+module.exports = handler;

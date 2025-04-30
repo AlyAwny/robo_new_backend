@@ -1,20 +1,13 @@
 const express = require("express");
 const router = express.Router();
  
+// In-memory robot state
 let robot_position = { x: 0, y: 0 };
 let battery_voltage = 12.5;
 let robot_speed = 0.6;
 let robot_state = "Idle";
  
-// Protected endpoint
-//router.get("/protected", (req, res) => {
-  router.get( (req, res) => {
-  const user = req.auth.user;
-  console.log(`User ${user} is authenticated.`);
-  res.json({ message: `Welcome ${user}, you are authorized.` });
-});
- 
-// Robot status endpoint
+// GET robot status
 router.get("/status", (req, res) => {
   console.log("Fetching robot status");
   res.json({
@@ -25,18 +18,16 @@ router.get("/status", (req, res) => {
   });
 });
  
-// Error route
-router.get("/error_test", (req, res) => {
-  console.log("Test error route triggered.");
-  res.status(500).json({ detail: "Test error route triggered" });
+// POST command to robot
+router.post("/command", (req, res) => {
+  const { command, speed, position } = req.body;
+  console.log("Received robot command:", req.body);
+ 
+  if (command) robot_state = command;
+  if (speed) robot_speed = speed;
+  if (position) robot_position = position;
+ 
+  res.json({ success: true, message: "Command received", state: robot_state });
 });
  
 module.exports = router;
- 
-// Export robot state for WebSocket usage
-module.exports.robotState = {
-  robot_position,
-  battery_voltage,
-  robot_speed,
-  robot_state,
-}
