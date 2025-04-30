@@ -13,6 +13,13 @@ app.use(
   })
 );
  
+ app.get("/", (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: "🚀 Robot server is deployed and running!",
+    timestamp: new Date().toISOString(),
+  });
+});
 // Auth middleware
 app.use(
   basicAuth({
