@@ -7,7 +7,8 @@ let robot_speed = 0.6;
 let robot_state = "Idle";
  
 // Protected endpoint
-router.get("/protected", (req, res) => {
+//router.get("/protected", (req, res) => {
+  router.get( (req, res) => {
   const user = req.auth.user;
   console.log(`User ${user} is authenticated.`);
   res.json({ message: `Welcome ${user}, you are authorized.` });
